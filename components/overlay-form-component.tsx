@@ -16,7 +16,6 @@ const OverlayFormComponent = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const form = event.currentTarget as any;
-    console.log("ss");
     if (form.checkValidity()) {
       event.preventDefault();
       event.stopPropagation();

@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { Form } from "react-bootstrap";
 import { RootState, useAppDispatch } from "@/store";
 import { useSelector } from "react-redux";
-import { setExpenses } from "@/store/reducers/expensesReducer";
+import { setState } from "@/store/reducers/expensesReducer";
 
 const AddExpenseComponent = () => {
   const dispatch = useAppDispatch();
@@ -19,6 +19,7 @@ const AddExpenseComponent = () => {
   const [isDescValid, setIsDescValid] = useState(false);
   const [isPayerValid, setIsPayerValid] = useState(false);
   const [isAmoutValid, setIsAmountValid] = useState(false);
+
   const checkFormValidity = () => {
     const descValid = desc.length > 0;
     const payerValid = payer !== null;
@@ -31,19 +32,22 @@ const AddExpenseComponent = () => {
   };
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(date, desc, amount, payer);
-    const form = event.currentTarget as any;
 
     if (checkFormValidity()) {
       setValidated(true);
-    } else {
-      dispatch(setExpenses([date, desc, amount, payer]));
+      dispatch(
+        setState([
+          ...expenses,
+          { date: date, desc: desc, amount: amount, payer: payer },
+        ])
+      );
+    }else{
+      
     }
   };
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPayer(event.target.value as any);
   };
-
   console.log(expenses);
   return (
     <>
