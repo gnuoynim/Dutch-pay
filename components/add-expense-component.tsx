@@ -16,28 +16,40 @@ const AddExpenseComponent = () => {
   const [amount, setAmount] = useState<number>(0);
   const [payer, setPayer] = useState(null);
   const [validated, setValidated] = useState(false);
+  const [isDescValid, setIsDescValid] = useState(false);
+  const [isPayerValid, setIsPayerValid] = useState(false);
+  const [isAmoutValid, setIsAmountValid] = useState(false);
+  const checkFormValidity = () => {
+    const descValid = desc.length > 0;
+    const payerValid = payer !== null;
+    const amountValid = amount > 0;
+
+    setIsDescValid(descValid);
+    setIsPayerValid(payerValid);
+    setIsAmountValid(amountValid);
+    return true || false;
+  };
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     console.log(date, desc, amount, payer);
     const form = event.currentTarget as any;
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
+
+    if (checkFormValidity()) {
+      setValidated(true);
     } else {
       dispatch(setExpenses([date, desc, amount, payer]));
     }
-    setValidated(true);
   };
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPayer(event.target.value as any);
   };
-  
-  console.log(expenses)
+
+  console.log(expenses);
   return (
     <>
-   
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form noValidate onSubmit={handleSubmit}>
         <h1>비용을 추가하기</h1>
-        
+
         <Form.Group>
           <Form.Control
             type="date"
@@ -46,6 +58,9 @@ const AddExpenseComponent = () => {
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
+          <Form.Control.Feedback type="invalid">
+            날짜를 선택해주세요
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group>
           <Form.Control
@@ -53,10 +68,12 @@ const AddExpenseComponent = () => {
             required
             name="expenseDescription"
             placeholder="비용에 대해 설명해주세요"
+            isValid={isDescValid}
+            isInvalid={!isDescValid && validated}
             value={desc}
             onChange={({ target }) => setDesc(target.value)}
           />
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback type="invalid" data-valid={isDescValid}>
             내용을 입력해주세요
           </Form.Control.Feedback>
         </Form.Group>
@@ -66,10 +83,12 @@ const AddExpenseComponent = () => {
             required
             name="expenseAmount"
             placeholder="비용은 얼마였나요?"
+            isValid={isAmoutValid}
+            isInvalid={!isAmoutValid && validated}
             value={amount}
             onChange={(e) => setAmount(parseInt(e.target.value))}
           />
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback type="invalid" data-valid={isAmoutValid}>
             금액을 입력해주세요
           </Form.Control.Feedback>
         </Form.Group>
@@ -79,27 +98,27 @@ const AddExpenseComponent = () => {
             defaultValue=""
             required
             onChange={handleChangeSelect}
+            isValid={isPayerValid}
+            isInvalid={!isPayerValid && validated}
           >
             <option disabled value="">
               누가 결제했나요
             </option>
             <option>김민영</option>
-            <option>ww</option>
+            <option>홍길동</option>
             {groupMember.groupMember.map((i, index) => (
-              <option key={i} value={i}>
-                {i}
-                
+              <option key={index} value={i}>
+                {i}강아지
               </option>
-              
             ))}
           </Form.Select>
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback type="invalid" data-valid={isPayerValid}>
             결제자를 선택해주세요
           </Form.Control.Feedback>
         </Form.Group>
+
         <button type="submit">추가하기</button>
       </Form>
-      
     </>
   );
 };

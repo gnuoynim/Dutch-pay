@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit"
 const groupMemberReducer =createSlice({
     name:"groupMember",
     initialState:{
-        groupMember: [""]
+        groupMember: ["강남"]
     },
     reducers:{
         setGroupMember(state, action){
