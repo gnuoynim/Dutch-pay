@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import ExpenseInterface from "@/interface/expense-interface";
-const initialState :ExpenseInterface[]= [{
-  date: "",
-  desc: "",
-  amount: 0,
-  payer: null,
-}];
+import { stat } from "fs";
+
+const initialState: ExpenseInterface[] = [
+  {
+    date: "",
+    desc: "",
+    amount: 0,
+    payer: null,
+    validity:false,
+  },
+];
+
 const expenseReducer = createSlice({
   name: "expenses",
   initialState,
@@ -17,5 +23,5 @@ const expenseReducer = createSlice({
    
   },
 });
-export const { setState } = expenseReducer.actions;
+export const { setState} = expenseReducer.actions;
 export default expenseReducer.reducer;

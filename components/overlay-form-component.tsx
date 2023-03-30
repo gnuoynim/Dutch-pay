@@ -29,9 +29,9 @@ const OverlayFormComponent = () => {
     dispatch(setGroupName(group));
   };
   return (
-    <>
-      <h1>DutchPay</h1>
+    <div>
       <Container>
+        <h1>DutchPay</h1>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Row>
             <h2>먼저, 더치페이 할 그룹의 이름을 정해볼까요?</h2>
@@ -57,7 +57,7 @@ const OverlayFormComponent = () => {
           </Row>
         </Form>
       </Container>
-    </>
+    </div>
   );
 };
 export default OverlayFormComponent;

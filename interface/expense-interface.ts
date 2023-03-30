@@ -3,6 +3,7 @@ interface ExpenseInterface{
   desc: string;
   amount: number;
   payer: null;
+  validity :  boolean;
 }
 
 export default ExpenseInterface;

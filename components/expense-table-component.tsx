@@ -5,8 +5,9 @@ import { RootState } from "@/store";
 
 const ExpenseTableComponent = () => {
   const expenses = useSelector((state: RootState) => state.expenses);
+
   return (
-    <>
+    <div className="expenseTable col">
       <Table borderless hover responsive>
         <thead>
           <tr>
@@ -17,18 +18,17 @@ const ExpenseTableComponent = () => {
           </tr>
         </thead>
         <tbody>
-          {expenses.map((item, index)=>(
+          {expenses.map((item, index) => (
             <tr key={index}>
               <td>{item.date}</td>
               <td>{item.desc}</td>
               <td>{item.payer}</td>
               <td>{item.amount}원</td>
-           </tr>
+            </tr>
           ))}
-          
         </tbody>
       </Table>
-    </>
+    </div>
   );
 };
 

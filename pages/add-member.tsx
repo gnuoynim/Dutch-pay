@@ -13,13 +13,11 @@ const AddMember = () => {
   const groupName = useSelector((state: RootState) => state.groupName);
   const dispatch = useAppDispatch();
   const [state, setState] = useState([""]);
-  const [states, setStates] = useState<string[]>([]);
   const Router = useRouter();
   const [formSubmit, setFormSubmit] = useState(false);
   
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(state)
     setFormSubmit(true);
     dispatch(setGroupMember(state));
     Router.push("/expense")
@@ -37,7 +35,7 @@ const AddMember = () => {
               value={state}
               onChange={setState}
               name="group"
-              placeHolder="그룹명을 입력하세요"
+              placeHolder="친구이름을 입력하세요"
             />
             {state.length === 0 && <span>그룹명을 만들어주세요</span>}
           </Row>

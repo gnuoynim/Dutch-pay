@@ -1,9 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit"
 
+
 const groupMemberReducer =createSlice({
     name:"groupMember",
     initialState:{
-        groupMember: ["강남"]
+        groupMember: [""]
     },
     reducers:{
         setGroupMember(state, action){
