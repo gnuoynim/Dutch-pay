@@ -3,12 +3,14 @@ import { useDispatch } from "react-redux";
 import expensesReducer from "./reducers/expensesReducer";
 import groupMemberReducer from "./reducers/groupMemberReducer";
 import groupNameReducer from "./reducers/groupNameReducer";
+import validityReducer from "./reducers/validityReducer";
 
 export const store = configureStore({
   reducer: {
     groupName: groupNameReducer,
     groupMember: groupMemberReducer,
     expenses: expensesReducer,
+    validity: validityReducer,
   },
 });
 

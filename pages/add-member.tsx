@@ -28,16 +28,16 @@ const AddMember = () => {
       <Container>
         <Form noValidate onSubmit={handleSubmit}>
           <Row>
-            <h2>{groupName.groupName} 멤버들 이름은?</h2>
+            <h2> 더치페이할 <span>member{groupName.groupName}</span>들의 이름은?</h2>
           </Row>
           <Row>
             <TagsInput
               value={state}
               onChange={setState}
               name="group"
-              placeHolder="친구이름을 입력하세요"
+              placeHolder="멤버들을 입력해주세요"
             />
-            {state.length === 0 && <span>그룹명을 만들어주세요</span>}
+            {state.length === 0 && <span>멤버들을 입력해주세요</span>}
           </Row>
           <Row>
             <Button type="submit" >저장</Button>

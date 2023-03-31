@@ -8,7 +8,7 @@ const initialState: ExpenseInterface[] = [
     desc: "",
     amount: 0,
     payer: null,
-    validity:false,
+    validity: false,
   },
 ];
 

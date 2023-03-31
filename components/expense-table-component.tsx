@@ -1,11 +1,19 @@
 import { Table } from "react-bootstrap";
-import { useAppDispatch } from "@/store";
+import { useAppDispatch, RootState } from "@/store";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+import { setValidity } from "@/store/reducers/validityReducer";
+import { useState } from "react";
 
 const ExpenseTableComponent = () => {
   const expenses = useSelector((state: RootState) => state.expenses);
-
+  const validity = useSelector((state: RootState) => state.validity);
+  const [confirm, setConfirm] = useState(false);
+  const dispatch = useAppDispatch();
+  console.log(validity)
+  const handleClickConfirm = () => {
+    dispatch(setValidity(true));
+    console.log(validity)
+  };
   return (
     <div className="expenseTable col">
       <Table borderless hover responsive>
@@ -28,6 +36,9 @@ const ExpenseTableComponent = () => {
           ))}
         </tbody>
       </Table>
+      <button type="button" onClick={handleClickConfirm}>
+        정산결과 확인
+      </button>
     </div>
   );
 };
