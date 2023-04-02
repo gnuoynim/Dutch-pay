@@ -19,7 +19,7 @@ import { toPng } from "html-to-image";
     membersToPay[member] = amountPerPerson;
   });
 
-  expenses.forEach(({ payer, amount } ) => {
+  expenses.forEach(({ payer, amount } : any ) => {
     membersToPay[payer] -= amount;
   });
 

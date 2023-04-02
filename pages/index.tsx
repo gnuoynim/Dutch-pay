@@ -1,10 +1,11 @@
 import BaseLayout from "@/layout/base-layout";
-import CreateGroupComponent from "@/components/create-group-component";
+import OverlayFormComponent from "@/components/overlay-form-component";
+
 
 const Index = () => {
   return (
     <BaseLayout>
-      <CreateGroupComponent/>
+      <OverlayFormComponent/>
     </BaseLayout>
   );
 };
