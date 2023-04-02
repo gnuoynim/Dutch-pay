@@ -40,7 +40,7 @@ const AddMember = () => {
             {state.length === 0 && <span>멤버들을 입력해주세요</span>}
           </Row>
           <Row>
-            <Button type="submit" >저장</Button>
+            <Button type="submit">저장</Button>
           </Row>
         </Form>
       </Container>

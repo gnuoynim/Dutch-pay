@@ -9,10 +9,9 @@ const ExpenseTableComponent = () => {
   const validity = useSelector((state: RootState) => state.validity);
   const [confirm, setConfirm] = useState(false);
   const dispatch = useAppDispatch();
-  console.log(validity)
+
   const handleClickConfirm = () => {
     dispatch(setValidity(true));
-    console.log(validity)
   };
   return (
     <div className="expenseTable col">
@@ -28,10 +27,14 @@ const ExpenseTableComponent = () => {
         <tbody>
           {expenses.map((item, index) => (
             <tr key={index}>
-              <td>{item.date}</td>
-              <td>{item.desc}</td>
-              <td>{item.payer}</td>
-              <td>{item.amount}원</td>
+              {item.validity === false ? undefined:(
+                <>
+                  <td>{item.date}</td>
+                  <td>{item.desc}</td>
+                  <td>{item.payer}</td>
+                  <td>{item.amount}원</td>
+                </>
+              ) }
             </tr>
           ))}
         </tbody>

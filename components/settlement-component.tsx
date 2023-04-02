@@ -6,7 +6,8 @@ import { useState, useRef, useCallback } from "react";
 import { setValidity } from "@/store/reducers/validityReducer";
 import { toPng } from "html-to-image";
 
-export const calculateMinimun = (expenses, groupMember, amountPerPerson) => {
+
+ const calculateMinimun = (expenses:any , groupMember:any, amountPerPerson:any) => {
   const minTransactions = [] as any;
 
   if (amountPerPerson === 0) {
@@ -18,7 +19,7 @@ export const calculateMinimun = (expenses, groupMember, amountPerPerson) => {
     membersToPay[member] = amountPerPerson;
   });
 
-  expenses.forEach(({ payer, amount }) => {
+  expenses.forEach(({ payer, amount } ) => {
     membersToPay[payer] -= amount;
   });
 
@@ -112,6 +113,7 @@ const SettlementComponent = () => {
       className={validity.validity ? "expenseResult on" : "expenseResult"}
     >
       <div>
+       
         <h6>정산내용</h6>
         {totalExpenseAmount > 0 && groupMembersCount > 0 && (
           <>
