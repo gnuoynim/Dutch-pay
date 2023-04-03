@@ -1,9 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alkatra:wght@400;500;600;700&family=Fasthand&family=Noto+Sans+KR&display=swap");
 
 body {
   background-color: #b0c4ce57;
   font-family: "Noto Sans KR", sans-serif !important;
 }
+ul,
+li {
+  list-style: none;
+}
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
 @mixin button {
   background-color: #144d37;
   color: #fff;
@@ -17,23 +30,44 @@ body {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
-.mobile {
-  .container {
-    width: 50vw;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: colum;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
-    gap: 10px;
+
+@mixin logo {
+  font-family: "Alkatra", cursive;
+  font-size: 3em;
+}
+h1 {
+  @include logo;
+}
+
+.container {
+  width: 50vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0px;
+  gap: 10px;
+  @media (min-width: 576px) {
+    flex-direction: row;
+  }
+}
+.overlayForm {
+  form {
+    > div:nth-child(2) {
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    div {
+      padding: 0;
+    }
   }
 }
 
-form {
-  > div {
-    margin-bottom: 20px;
-  }
+.memberName {
+  background-color: #096a453b;
+  padding: 0 10px;
 }
 .addExpenseForm {
   background-color: #096a45;
@@ -68,9 +102,9 @@ form {
   border-radius: 10px;
 }
 
-button[type="submit"],button[type="button"] {
+button[type="submit"],
+button[type="button"] {
   background-color: #096a45;
-
   color: #fff;
   border: none;
   width: 100%;
@@ -109,7 +143,43 @@ button[type="submit"],button[type="button"] {
     border: 2px solid #096a45;
     z-index: 10;
   }
- &.on{
-  display: block;
- }
+  &.on {
+    display: block;
+  }
+}
+.member {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+
+  li {
+    margin-right: 5px;
+    position: relative;
+    font-size: 1.2em;
+    padding: 0 5px;
+
+    &::after{
+      content: "";
+      display: block;
+      width: 100%;
+      height: 6px;
+      background-color: rgb(9 106 69 / 34%);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+    }
+  }
+}
+.inputBox {
+  margin-top: 30px;
+}
+.inputNameTags {
+  input::placeholder {
+    color: red;
+  }
+}
+.inputForm{
+   margin-top: 3em;
 }
