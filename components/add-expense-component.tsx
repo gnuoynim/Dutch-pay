@@ -63,7 +63,7 @@ const AddExpenseComponent = () => {
     <>
       <div className="addExpenseForm col">
         <Form noValidate onSubmit={handleSubmit}>
-          <h1>비용을 추가하기</h1>
+          <h2>비용을 추가하기</h2>
           <Form.Group>
             <Form.Control
               type="date"

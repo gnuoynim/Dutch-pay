@@ -6,8 +6,11 @@ import { useState, useRef, useCallback } from "react";
 import { setValidity } from "@/store/reducers/validityReducer";
 import { toPng } from "html-to-image";
 
-
- const calculateMinimun = (expenses:any , groupMember:any, amountPerPerson:any) => {
+const calculateMinimun = (
+  expenses :any,
+  groupMember:any,
+  amountPerPerson:any
+) => {
   const minTransactions = [] as any;
 
   if (amountPerPerson === 0) {
@@ -19,7 +22,7 @@ import { toPng } from "html-to-image";
     membersToPay[member] = amountPerPerson;
   });
 
-  expenses.forEach(({ payer, amount } : any ) => {
+  expenses.forEach(({ payer, amount }: any) => {
     membersToPay[payer] -= amount;
   });
 
@@ -101,9 +104,7 @@ const SettlementComponent = () => {
         link.href = dataUrl;
         link.click();
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [ref]);
 
   return (
@@ -113,16 +114,15 @@ const SettlementComponent = () => {
       className={validity.validity ? "expenseResult on" : "expenseResult"}
     >
       <div>
-       
-        <h6>정산내용</h6>
+        <p>정산내용</p>
         {totalExpenseAmount > 0 && groupMembersCount > 0 && (
           <>
-            <div>
-              <span>
-                {groupMembersCount}명이서, 총{totalExpenseAmount}원 지출
-              </span>
-              <br />
-              <span>한사람당 {splitAmount}</span>
+            <div className="total">
+              <p>
+                <span className="num">{groupMembersCount}명</span>이서, 총
+                <span className="num">{totalExpenseAmount}원</span> 지출
+              </p>
+              <p>한사람당 <span>{splitAmount}원</span></p>
             </div>
             <ul>
               {minimumTransaction.map(
@@ -132,7 +132,9 @@ const SettlementComponent = () => {
                 ) => (
                   <li key={index}>
                     <span>
-                      {sender}가{receiver}에게 {amount}원 보내기
+                      {index !== 0
+                        ? `${sender}이 ${receiver}에게 ${amount}원 보내기`
+                        : null}
                     </span>
                   </li>
                 )
@@ -140,7 +142,7 @@ const SettlementComponent = () => {
             </ul>
           </>
         )}
-        <div>
+        <div className="buttonBox">
           <button type="button" onClick={handleClickCheck}>
             확인
           </button>

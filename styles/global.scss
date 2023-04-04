@@ -8,14 +8,6 @@ ul,
 li {
   list-style: none;
 }
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px,
-);
 
 @mixin button {
   background-color: #144d37;
@@ -71,8 +63,16 @@ h1 {
 }
 .addExpenseForm {
   background-color: #096a45;
-  padding: 3rem;
+  padding: 1rem;
   border-radius: 20px;
+  h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  form > div {
+    margin-bottom: 20px;
+  }
   .form-control {
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
       rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
@@ -100,6 +100,20 @@ h1 {
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border: 1px solid #0c4c47;
   border-radius: 10px;
+  thead {
+    border-bottom: 2px solid #0c4c47;
+    th {
+      padding: 10px;
+      text-align: center;
+    }
+  }
+  tbody {
+    tr {
+      &:nth-child(even) {
+        background-color: #096a451c;
+      }
+    }
+  }
 }
 
 button[type="submit"],
@@ -138,13 +152,37 @@ button[type="button"] {
     background-color: #fff;
     padding: 30px;
     width: 500px;
-    height: 500px;
     border-radius: 20px;
     border: 2px solid #096a45;
     z-index: 10;
+    @media (max-width: 576px) {
+      width: 100%;
+    }
+    p {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    .total {
+      p {
+        font-size: 1rem;
+        margin-bottom: 0;
+        .num {
+         
+        }
+        &:nth-of-type(2){
+         
+        }
+      }
+      margin-bottom: 1rem;
+    }
   }
   &.on {
     display: block;
+  }
+
+  .buttonBox {
+    display: flex;
+    gap: 20px;
   }
 }
 .member {
@@ -159,7 +197,7 @@ button[type="button"] {
     font-size: 1.2em;
     padding: 0 5px;
 
-    &::after{
+    &::after {
       content: "";
       display: block;
       width: 100%;
@@ -180,6 +218,6 @@ button[type="button"] {
     color: red;
   }
 }
-.inputForm{
-   margin-top: 3em;
+.inputForm {
+  margin-top: 3em;
 }

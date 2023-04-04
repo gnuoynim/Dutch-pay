@@ -19,8 +19,8 @@ const ExpenseTableComponent = () => {
         <thead>
           <tr>
             <th>날짜</th>
-            <th>내용</th>
             <th>결제내용</th>
+            <th>지출한 사람</th>
             <th>금액</th>
           </tr>
         </thead>
