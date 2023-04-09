@@ -6,17 +6,13 @@ import { setState } from "@/store/reducers/expensesReducer";
 import ExpenseTableComponent from "./expense-table-component";
 
 const AddExpenseComponent = () => {
-  const dispatch = useAppDispatch();
   const groupMember = useSelector((state: RootState) => state.groupMember);
   const expenses = useSelector((state: RootState) => state.expenses);
-  const today = new Date();
-  const [date, setDate] = useState(
-    [today.getFullYear(), today.getMonth() + 1, today.getDate()].join("-")
-  );
+  const dispatch = useAppDispatch();
+  const [date, setDate] = useState("");
   const [desc, setDesc] = useState("");
   const [amount, setAmount] = useState<number>(0);
-  const [payer, setPayer] = useState(null);
-
+  const [payer, setPayer] = useState<string>("");
   const [validated, setValidated] = useState(false);
   const [isDateValid, setIsDateValid] = useState(false);
   const [isDescValid, setIsDescValid] = useState(false);
@@ -24,41 +20,47 @@ const AddExpenseComponent = () => {
   const [isAmoutValid, setIsAmountValid] = useState(false);
 
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setPayer(event.target.value as any);
+    setPayer(event.target.value as string);
   };
+
   const checkFormValidity = () => {
     const dateValid = date.length > 0;
     const descValid = desc.length > 0;
-    const payerValid = payer !== null;
+    const payerValid = payer.length >0 ;
     const amountValid = amount > 0;
+
     setIsDateValid(dateValid);
     setIsDescValid(descValid);
     setIsPayerValid(payerValid);
     setIsAmountValid(amountValid);
+    return true || false;
 
-    if (validated) {
-      return true;
-    }
   };
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    if (!checkFormValidity()) {
+    const form = event?.currentTarget;
+    if (!form.checkValidity() === checkFormValidity()) {
       setValidated(true);
-      console.log("ff", validated);
+     console.log("44")
     } else {
-      console.log("dd", validated);
-
+      console.log("55")
       dispatch(
         setState([
           ...expenses,
-          { date: date, desc: desc, amount: amount, payer: payer, validated: true },
+          {
+            date: date,
+            desc: desc,
+            amount: amount,
+            payer: payer,
+            validated: true,
+          },
         ])
       );
     }
+
   };
 
+  const handleClickAdd = () => {};
   return (
     <>
       <div className="addExpenseForm col">
@@ -102,7 +104,7 @@ const AddExpenseComponent = () => {
               isValid={isAmoutValid}
               isInvalid={!isAmoutValid && validated}
               value={amount}
-              onChange={(e) => setAmount(parseInt(e.target.value))}
+              onChange={(e) => setAmount(parseInt(e.target.value) || 0)}
             />
             <Form.Control.Feedback type="invalid" data-valid={isAmoutValid}>
               금액을 입력해주세요
@@ -130,7 +132,9 @@ const AddExpenseComponent = () => {
               결제자를 선택해주세요
             </Form.Control.Feedback>
           </Form.Group>
-          <button type="submit">추가하기</button>
+          <button type="submit" onClick={handleClickAdd}>
+            추가하기
+          </button>
         </Form>
       </div>
       <ExpenseTableComponent />

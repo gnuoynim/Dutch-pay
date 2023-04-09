@@ -7,9 +7,9 @@ import { setValidity } from "@/store/reducers/validityReducer";
 import { toPng } from "html-to-image";
 
 const calculateMinimun = (
-  expenses :any,
-  groupMember:any,
-  amountPerPerson:any
+  expenses: any,
+  groupMember: any,
+  amountPerPerson: any
 ) => {
   const minTransactions = [] as any;
 
@@ -122,7 +122,9 @@ const SettlementComponent = () => {
                 <span className="num">{groupMembersCount}명</span>이서, 총
                 <span className="num">{totalExpenseAmount}원</span> 지출
               </p>
-              <p>한사람당 <span>{splitAmount}원</span></p>
+              <p>
+                한사람당 <span>{splitAmount}원</span>
+              </p>
             </div>
             <ul>
               {minimumTransaction.map(
